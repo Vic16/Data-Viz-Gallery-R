@@ -37,8 +37,8 @@ El data set utilizado tiene que ver enfermedades del corazón y puede ser encont
 #### Gráfico de barras con una variable categórica:
 #### ![Gráfico de barras con una variable categórica](img/G4.png):
 
-#### !Boxplot con Grupos Etarios:
-#### [Boxplot con Grupos Etarios](img/G5.png):
+#### Boxplot con Grupos Etarios:
+#### ![Boxplot con Grupos Etarios](img/G5.png):
 
 #### Boxplot con 2 variables categóricas:
 #### ![Boxplot con 2 variables categóricas](img/G6.png):

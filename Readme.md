@@ -1,7 +1,7 @@
 
 ## Data Viz Project
 El siguiente repo es una guía para graficar y un portafolio de viz.
-El data set utilizado tiene que ver enfermedades del corazón y puede ser encontrado en [Kaggle](https://www.kaggle.com/ronitf/heart-disease-uci).
+El data set utilizado tiene que ver con enfermedades del corazón y puede ser encontrado en [Kaggle](https://www.kaggle.com/ronitf/heart-disease-uci).
 
 ### Breve descripción de las variables:
 

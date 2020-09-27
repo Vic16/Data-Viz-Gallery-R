@@ -23,7 +23,7 @@ El data set utilizado tiene que ver enfermedades del corazón y puede ser encont
 
 -Oldpeak, Depresión del ST inducida por el ejercicio en relación con el reposo. INT
 
-#### [Gráfico de barras](/img/G1.png):
+#### ![Gráfico de barras](/img/G1.png):
 #### [Gráfico de barras con dos variables categóricas](img/G2.png):
 #### [Boxplot](img/G3.png):
 #### [Gráfico de barras con una variable categórica](img/G4.png):

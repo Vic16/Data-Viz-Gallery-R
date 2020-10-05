@@ -74,5 +74,5 @@ Acá se sumaron las observación con "geom_jitter"
 #### Scatter plot sumando la recta de regresión:
 #### ![Scatter plot sumando la recta de regresión](img/G16.png):
 
-#### Matrix de Correlaciones:
+#### Matriz de Correlaciones:
 #### ![Matrix de Correlaciones](img/G17.png):

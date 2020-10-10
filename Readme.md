@@ -47,7 +47,7 @@ reposo. INT
     df$exang <- replace(df$exang, df$exang =="0", "No")
     df$exang <- as.factor(df$exang)
 
-#### Grafico de Barras Simple
+#### Gráfico de Barras Simple
 
     df  %>%
       ggplot(aes(x = sex, fill = sex)) + geom_bar(show.legend = F) + theme_minimal() + 
@@ -56,7 +56,7 @@ reposo. INT
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
-#### Grafico de barras con dos variables categóricas
+#### Gráfico de barras con dos variables categóricas
 
     df  %>%
       ggplot(aes(x = sex, fill = sex)) + geom_bar(show.legend = T) + 
@@ -77,11 +77,13 @@ reposo. INT
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
+    
+
+#### Bar plot de varias categóricas
+
     ## Categorizamos la edad en 7 
     categorias <- c("20-29", "30-39", "40-49","50-59","60-69", "70-79")
     df$age.cut <- cut(df$age, breaks = c(20, 30, 40, 50, 60, 70, 80), labels = categorias)
-
-#### Bar plot de varias categorias
 
     df  %>%
       ggplot(aes(x = age.cut, fill = sex)) + geom_bar(show.legend = T) + theme_minimal() + 
@@ -90,7 +92,7 @@ reposo. INT
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
-#### Boxplot de varias categorias
+#### Boxplot de varias categórias
 
     df %>%
       ggplot(aes(x = age.cut, y = trestbps, color = age.cut, fill = age.cut)) + 
@@ -99,7 +101,7 @@ reposo. INT
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
-#### Boxplot con dos variables categoricas
+#### Boxplot con dos variables categóricas
 
     df %>%
       ggplot(aes(x = sex, y = chol, color = sex, fill = sex)) + 
@@ -130,7 +132,7 @@ Muchos boxplots
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
 
-#### Muchos boxplots con una variable categorica
+#### Muchos boxplots con una variable categórica
 
     df %>%
       ggplot(aes(x = age.cut, y = chol, fill = sex, color = sex)) + 
@@ -151,7 +153,7 @@ Muchos boxplots
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
 
-Hist con una variable categorica
+Hist con una variable categórica
 --------------------------------
 
     df %>%
@@ -163,7 +165,7 @@ Hist con una variable categorica
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-14-1.png)
 
-#### Scatterplot separado por una variable categorica
+#### Scatterplot separado por una variable categórica
 
     df %>%
       ggplot(aes(x = trestbps,y = chol,fill = sex, color = sex)) + 
@@ -172,7 +174,7 @@ Hist con una variable categorica
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-15-1.png)
 
-#### Scatterplot con la recta de Regresion
+#### Scatterplot con la recta de Regresión
 
     df %>%
       ggplot(aes(x = trestbps,y = chol)) + 
@@ -192,7 +194,7 @@ Hist con una variable categorica
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-17-1.png)
 
-#### Scatterplot incluyendo una variable categorica
+#### Scatterplot incluyendo una variable categórica
 
     df %>%
       ggplot(aes(x = thalach,y = age, color = exang, fill = exang)) + 
@@ -201,7 +203,7 @@ Hist con una variable categorica
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-18-1.png)
 
-#### Scatterplot incluyendo una variable categorica y la recta de regresion
+#### Scatterplot incluyendo una variable categórica y la recta de regresión
 
     df %>%
       ggplot(aes(x = thalach,y = age, color = exang, fill = exang)) + 

@@ -39,25 +39,7 @@ reposo. INT
 
 
     df <- read_csv("heart.csv")
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   age = col_double(),
-    ##   sex = col_double(),
-    ##   cp = col_double(),
-    ##   trestbps = col_double(),
-    ##   chol = col_double(),
-    ##   fbs = col_double(),
-    ##   restecg = col_double(),
-    ##   thalach = col_double(),
-    ##   exang = col_double(),
-    ##   oldpeak = col_double(),
-    ##   slope = col_double(),
-    ##   ca = col_double(),
-    ##   thal = col_double(),
-    ##   target = col_double()
-    ## )
-
+    
     df$sex <- replace(df$sex, df$sex =="1", "Male")
     df$sex <- replace(df$sex, df$sex =="0", "Female")
     df$sex <- as.factor(df$sex)

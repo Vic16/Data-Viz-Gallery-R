@@ -1,7 +1,32 @@
+    library(tidyverse)
 
-## Data Viz Project
-El siguiente repo es una guía para graficar y un portafolio de viz.
-El data set utilizado tiene que ver con enfermedades del corazón y puede ser encontrado en [Kaggle](https://www.kaggle.com/ronitf/heart-disease-uci).
+    ## -- Attaching packages --------------------------------------------- tidyverse 1.3.0 --
+
+    ## v ggplot2 3.3.2     v purrr   0.3.4
+    ## v tibble  2.1.3     v dplyr   1.0.2
+    ## v tidyr   1.0.0     v stringr 1.4.0
+    ## v readr   1.3.1     v forcats 0.4.0
+
+    ## -- Conflicts ------------------------------------------------ tidyverse_conflicts() --
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
+
+    library(ggplot2)
+    library(stringr)
+    library(dplyr)
+    library(GGally)
+
+    ## Registered S3 method overwritten by 'GGally':
+    ##   method from   
+    ##   +.gg   ggplot2
+
+Data Viz Project
+----------------
+
+El siguiente repo es una guía para graficar y un portafolio de viz. El
+data set utilizado tiene que ver con enfermedades del corazón y puede
+ser encontrado en
+[Kaggle](https://www.kaggle.com/ronitf/heart-disease-uci).
 
 ### Breve descripción de las variables:
 
@@ -21,58 +46,213 @@ El data set utilizado tiene que ver con enfermedades del corazón y puede ser en
 
 -Exang, Angina inducida al ejercicio. Booleano
 
--Oldpeak, Depresión del ST inducida por el ejercicio en relación con el reposo. INT
+-Oldpeak, Depresión del ST inducida por el ejercicio en relación con el
+reposo. INT
 
-*** 
+------------------------------------------------------------------------
 
-#### Gráfico de barras:
-#### ![Gráfico de barras](/img/G1.png):
+    df <- read_csv("heart.csv")
 
-#### Gráfico de barras con dos variables categóricas:
-#### ![Gráfico de barras con dos variables categóricas](img/G2.png):
+    ## Parsed with column specification:
+    ## cols(
+    ##   age = col_double(),
+    ##   sex = col_double(),
+    ##   cp = col_double(),
+    ##   trestbps = col_double(),
+    ##   chol = col_double(),
+    ##   fbs = col_double(),
+    ##   restecg = col_double(),
+    ##   thalach = col_double(),
+    ##   exang = col_double(),
+    ##   oldpeak = col_double(),
+    ##   slope = col_double(),
+    ##   ca = col_double(),
+    ##   thal = col_double(),
+    ##   target = col_double()
+    ## )
 
-#### Boxplot:
-#### ![Boxplot](img/G3.png):
+    df$sex <- replace(df$sex, df$sex =="1", "Male")
+    df$sex <- replace(df$sex, df$sex =="0", "Female")
+    df$sex <- as.factor(df$sex)
+    df$exang <- replace(df$exang, df$exang =="1", "Yes")
+    df$exang <- replace(df$exang, df$exang =="0", "No")
+    df$exang <- as.factor(df$exang)
 
-#### Gráfico de barras con una variable categórica:
-#### ![Gráfico de barras con una variable categórica](img/G4.png):
+#### Grafico de Barras Simple
 
-#### Boxplot con Grupos Etarios:
-#### ![Boxplot con Grupos Etarios](img/G5.png):
+    df  %>%
+      ggplot(aes(x = sex, fill = sex)) + geom_bar(show.legend = F) + theme_minimal() + 
+      ylab("Frecuencia") +
+      xlab("")
 
-#### Boxplot con 2 variables categóricas:
-#### ![Boxplot con 2 variables categóricas](img/G6.png):
+![](README_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
-#### Boxplot del Nivel de presión en sangre por grupos Etarios y Género:
-#### ![Boxplot del Nivel de presión en sangre por grupos Etarios y Género](img/G7.png):
+#### Grafico de barras con dos variables categóricas
 
-#### Boxplot del Nivel de presión en sangre por grupos Etarios y Género 2:
-Acá se sumaron las observación con "geom_jitter"
-#### ![Boxplot del Nivel de presión en sangre por grupos Etarios y Género 2](img/G8.png):
+    df  %>%
+      ggplot(aes(x = sex, fill = sex)) + geom_bar(show.legend = T) + 
+      facet_wrap(~exang) +
+      theme_minimal() + 
+      ylab("Frecuencia") +
+      xlab("") +
+      ggtitle("Frecuencia del género en función de la presencia de angina inducida por ejercicio")
 
-#### Boxplot del nivel de Colesterol por género:
-#### ![Boxplot del nivel de Colesterol por género](img/G9.png):
+![](README_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
-#### Histograma:
-#### ![Histograma](img/G10.png):
+#### Box plot
 
-#### Histograma con una variable categórica:
-#### ![Histograma con una variable categórica](img/G11.png):
+    df %>%
+    ggplot(aes(x = sex, y = trestbps, fill = sex, color = sex)) + 
+      geom_boxplot(alpha = 0.75, show.legend = F) + 
+      theme_minimal()
 
-#### Histograma con una variable categórica V2
-#### ![Histograma con una variable categórica V2](img/G12.png):
+![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
-#### Scatter plot:
-#### ![Scatter plot](img/G13.png):
+    ## Categorizamos la edad en 7 
+    categorias <- c("20-29", "30-39", "40-49","50-59","60-69", "70-79")
+    df$age.cut <- cut(df$age, breaks = c(20, 30, 40, 50, 60, 70, 80), labels = categorias)
 
-#### Scatter plot de 3 variables:
-#### ![Scatter plot de 3 variables](img/G14.png):
+#### Bar plot de varias categorias
 
-#### Scatter plot sumando una variable categórica:
-#### ![Scatter plot sumando una variable categórica](img/G15.png):
+    df  %>%
+      ggplot(aes(x = age.cut, fill = sex)) + geom_bar(show.legend = T) + theme_minimal() + 
+      ylab("Frecuencia") +
+      xlab("Grupos Etarios")
 
-#### Scatter plot sumando la recta de regresión:
-#### ![Scatter plot sumando la recta de regresión](img/G16.png):
+![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
-#### Matriz de Correlaciones:
-#### ![Matrix de Correlaciones](img/G17.png):
+#### Boxplot de varias categorias
+
+    df %>%
+      ggplot(aes(x = age.cut, y = trestbps, color = age.cut, fill = age.cut)) + 
+      geom_boxplot(alpha = 0.75, show.legend = F) + 
+      theme_minimal()
+
+![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+
+#### Boxplot con dos variables categoricas
+
+    df %>%
+      ggplot(aes(x = sex, y = chol, color = sex, fill = sex)) + 
+      geom_boxplot(alpha = 0.75, show.legend = T) +
+      facet_wrap(~exang) +
+      theme_minimal() +
+      ggtitle("Distribución del Nivel del Colesterol en función del sexo y de la presencia de Angina")
+
+![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+
+Muchos boxplots
+---------------
+
+    df %>%
+      ggplot(aes(x = age.cut, y = trestbps, fill = sex, color = sex)) + 
+      geom_boxplot(alpha = 0.75, show.legend = T) + 
+      theme_minimal()
+
+![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+
+#### Muchos boxplots con las observaciones
+
+    df %>%
+      ggplot(aes(x = age.cut, y = trestbps, fill = sex, color = sex)) + 
+      geom_jitter(aes(color=sex),alpha=0.2) +
+      geom_boxplot(alpha = 0.75, show.legend = T) + 
+      theme_minimal()
+
+![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+
+#### Muchos boxplots con una variable categorica
+
+    df %>%
+      ggplot(aes(x = age.cut, y = chol, fill = sex, color = sex)) + 
+      facet_wrap(~sex) +
+      geom_boxplot(alpha = 0.75, show.legend = F) + 
+      theme_minimal()
+
+![](README_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+
+#### Hist
+
+    df %>%
+      ggplot(aes(x = trestbps)) +
+      geom_histogram(alpha = 0.75, show.legend = F,  color = "#005CAB", fill = "#005CAB") + 
+      theme_minimal()
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
+
+Hist con una variable categorica
+--------------------------------
+
+    df %>%
+      ggplot(aes(x = trestbps, color = sex, fill = sex)) + facet_wrap(~sex) +
+      geom_histogram(alpha = 0.75, show.legend = T) + 
+      theme_minimal()
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+![](README_files/figure-markdown_strict/unnamed-chunk-14-1.png)
+
+#### Scatterplot separado por una variable categorica
+
+    df %>%
+      ggplot(aes(x = trestbps,y = chol,fill = sex, color = sex)) + 
+      geom_point(alpha = 0.75) +
+      theme_minimal()
+
+![](README_files/figure-markdown_strict/unnamed-chunk-15-1.png)
+
+#### Scatterplot con la recta de Regresion
+
+    df %>%
+      ggplot(aes(x = trestbps,y = chol)) + 
+      geom_point(alpha = 0.75, color = "#005CAB") + geom_smooth(method = "lm") +
+      theme_minimal()
+
+    ## `geom_smooth()` using formula 'y ~ x'
+
+![](README_files/figure-markdown_strict/unnamed-chunk-16-1.png)
+
+#### Scatterplot de 3 variables
+
+    df %>%
+      ggplot(aes(x = trestbps,y = thalach, color = cp, fill = cp)) + 
+      geom_point(alpha = 0.75) + 
+      theme_minimal()
+
+![](README_files/figure-markdown_strict/unnamed-chunk-17-1.png)
+
+#### Scatterplot incluyendo una variable categorica
+
+    df %>%
+      ggplot(aes(x = thalach,y = age, color = exang, fill = exang)) + 
+      geom_point(alpha = 0.75, show.legend = T) + facet_wrap(~exang) +
+      theme_minimal()
+
+![](README_files/figure-markdown_strict/unnamed-chunk-18-1.png)
+
+#### Scatterplot incluyendo una variable categorica y la recta de regresion
+
+    df %>%
+      ggplot(aes(x = thalach,y = age, color = exang, fill = exang)) + 
+      geom_point(alpha = 0.75, show.legend = T) + facet_wrap(~exang) + 
+      geom_smooth(method = "lm") +
+      theme_minimal()
+
+    ## `geom_smooth()` using formula 'y ~ x'
+
+![](README_files/figure-markdown_strict/unnamed-chunk-19-1.png)
+
+#### Heatmap
+
+Para el heatmap primero calculamos la matriz de correlaciones
+
+    matriz_corr <- df %>%
+      select(age, cp, trestbps, chol,thalach, oldpeak) %>%
+      cor(method = "pearson") %>%
+      round(2)
+
+    ggcorr(matriz_corr, midpoint = 0, low = "#9fd3de", mid = "#0087cd", high = "#006fbe", label = T)
+
+![](README_files/figure-markdown_strict/unnamed-chunk-21-1.png)
